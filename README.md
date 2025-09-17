@@ -1,4 +1,4 @@
-# ◢◤ RATCHET ◢◤
+# ◢◤ R.A.T.C.H.E.T. ◢◤
 ## **Relativistic Asset Twin Computational Heuristics Enterprise Technology**
 ### *Transdimensional Industrial Consciousness Network*
 
