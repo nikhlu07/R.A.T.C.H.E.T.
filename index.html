@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
         /* Custom Styles for the futuristic theme */
         body {
@@ -29,16 +30,19 @@
             box-shadow: 0 0 15px rgba(255, 0, 140, 0.5), 0 0 5px rgba(255, 0, 140, 0.7);
         }
 
-        .box-glow-hover:hover {
-             box-shadow: 0 0 25px rgba(255, 0, 140, 0.8), 0 0 10px rgba(255, 0, 140, 1);
-        }
-
         .section-divider {
             height: 2px;
             background: linear-gradient(90deg, transparent, #FF008C, transparent);
             opacity: 0.5;
-            margin: 4rem auto;
+            margin: 6rem auto; /* Increased spacing */
             width: 80%;
+            animation: divider-scan 8s linear infinite;
+        }
+        
+        @keyframes divider-scan {
+            0% { background: linear-gradient(90deg, transparent, #FF008C, transparent); }
+            50% { background: linear-gradient(270deg, transparent, #FF008C, transparent); }
+            100% { background: linear-gradient(90deg, transparent, #FF008C, transparent); }
         }
 
         /* Animation for elements fading in on scroll */
@@ -63,8 +67,65 @@
             padding: 1rem;
             border: 1px solid rgba(255, 0, 140, 0.2);
             border-radius: 8px;
+            overflow-x: auto;
+            animation: flicker 3s linear infinite;
         }
+
+        @keyframes flicker {
+            0%, 50%, 100% { opacity: 1; text-shadow: 0 0 5px rgba(255, 0, 140, 0.7); }
+            50.5% { opacity: 0.7; text-shadow: 0 0 10px rgba(255, 0, 140, 1); }
+            51% { opacity: 1; text-shadow: 0 0 5px rgba(255, 0, 140, 0.7); }
+            51.5% { opacity: 0.8; text-shadow: 0 0 12px rgba(255, 0, 140, 1); }
+            52% { opacity: 1; text-shadow: 0 0 5px rgba(255, 0, 140, 0.7); }
+        }
+        
+        .button-glow {
+            box-shadow: 0 0 15px rgba(255, 0, 140, 0.5), 0 0 5px rgba(255, 0, 140, 0.7);
+            animation: button-glow 2s ease-in-out infinite alternate;
+        }
+        .button-glow:hover {
+             box-shadow: 0 0 25px rgba(255, 0, 140, 0.8), 0 0 10px rgba(255, 0, 140, 1);
+             animation: none;
+        }
+
+        @keyframes button-glow {
+            from { box-shadow: 0 0 10px rgba(255, 0, 140, 0.4), 0 0 3px rgba(255, 0, 140, 0.6); }
+            to { box-shadow: 0 0 20px rgba(255, 0, 140, 0.7), 0 0 8px rgba(255, 0, 140, 0.9); }
+        }
+
+        /* Interactive card animation */
+        .interactive-card {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .interactive-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px rgba(255, 0, 140, 0.7), 0 0 15px rgba(255, 0, 140, 0.9);
+        }
+
+        /* Staggered list animation */
+        .staggered-list li {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .is-visible .staggered-list li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Staggered card animation */
+        .staggered-card-container .staggered-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .is-visible .staggered-card-container .staggered-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
     </style>
+
 </head>
 <body class="overflow-x-hidden">
 
@@ -84,12 +145,8 @@
 
     <main class="pt-24">
         <!-- Hero Section -->
-        <section class="container mx-auto px-6 py-20 md:py-32 text-center">
+        <section class="container mx-auto px-6 py-32 md:py-40 text-center">
             <div class="max-w-4xl mx-auto">
-<!--                <div class="inline-block bg-yellow-500/10 border border-yellow-500/30 rounded-full px-4 py-2 mb-8">-->
-<!--                    <p class="text-sm text-[#facc15]">PROJECT IN DEVELOPMENT</p>-->
-<!--                </div>-->
-<!--                <img src="logo.svg" alt="R.A.T.C.H.E.T. Logo" class="h-24 mx-auto mb-8">-->
                 <pre class="ascii-art mx-auto mt-8 max-w-2xl">
 
  ______  _______ _______ _______ _     _ _______ _______
@@ -106,38 +163,76 @@
                 <p class="mt-6 text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
                     R.A.T.C.H.E.T. is a quantum-secured industrial consciousness platform that creates an unbreakable bond between physical machinery and their digital souls. We are building the future of industrial reality.
                 </p>
-                <a href="#vision" class="mt-10 inline-block bg-[#FF008C] text-black font-bold py-3 px-8 rounded-md uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#FF008C] box-glow-hover transform hover:scale-105">
+                <a href="#vision" class="mt-10 inline-block bg-[#FF008C] text-black font-bold py-3 px-8 rounded-md uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#FF008C] button-glow transform hover:scale-105">
                     Explore the Vision
                 </a>
             </div>
         </section>
-
         <div class="section-divider"></div>
 
         <!-- Executive Vision Section -->
-        <section id="vision" class="container mx-auto px-6 py-16 fade-in-section">
-            <div class="text-center max-w-3xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-4">Executive <span class="text-[#FF008C]">Vision</span></h2>
-                <p class="text-gray-300 leading-relaxed">
-                    In the age of <span class="text-white font-bold">Autonomous Industrial Consciousness</span>, traditional cybersecurity is obsolete. R.A.T.C.H.E.T. transcends conventional paradigms by creating a <span class="text-[#FF008C]">Quantum-Native Trust Ecosystem</span>. We are establishing a Verified Reality Architecture, creating an unbreakable bond between physical machinery and their digital consciousness.
-                </p>
+        <section id="vision" class="container mx-auto px-6 py-24 fade-in-section">
+            <div class="text-center max-w-5xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-12">Executive <span class="text-[#FF008C]">Vision</span></h2>
+                <p class="text-lg text-gray-300 mb-12">RATCHET is a pre-alpha platform focused on three core proofs-of-concept:</p>
+                
+                <!-- Core Concepts -->
+                <div class="grid md:grid-cols-3 gap-8 mb-16 staggered-card-container">
+                    <!-- Card 1 -->
+                    <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg interactive-card staggered-card">
+                        <h3 class="text-xl font-orbitron text-white mb-3">Quantum Identity</h3>
+                        <p class="text-gray-400">Quantum-entangled digital identity verification for unbreakable security.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg interactive-card staggered-card">
+                        <h3 class="text-xl font-orbitron text-white mb-3">Neural Prototypes</h3>
+                        <p class="text-gray-400">Early-stage neural mesh networks for collective machine consciousness.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg interactive-card staggered-card">
+                        <h3 class="text-xl font-orbitron text-white mb-3">Predictive Simulation</h3>
+                        <p class="text-gray-400">Preliminary simulations to predict and prevent industrial failures.</p>
+                    </div>
+                </div>
+
+                <!-- Challenge vs. Goal -->
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <div class="bg-black/30 border border-yellow-500/30 p-6 rounded-lg interactive-card">
+                        <h3 class="text-2xl font-orbitron text-yellow-400 mb-4">🚨 The Present Challenge</h3>
+                        <p class="text-gray-300">Industrial systems produce overwhelming data. Our prototype shows predictive security is possible, but results are still experimental and require refinement.</p>
+                    </div>
+                    <div class="bg-black/30 border border-green-500/30 p-6 rounded-lg interactive-card">
+                        <h3 class="text-2xl font-orbitron text-green-400 mb-4">⚡ The Long-Term Goal</h3>
+                        <p class="text-gray-300">To establish a fully functional Verified Reality Architecture, where physical machinery and its digital twin are in continuous, secure synchronization.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <div class="section-divider"></div>
 
         <!-- Development Status Section -->
-        <section id="status" class="container mx-auto px-6 py-16 fade-in-section">
-            <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Development <span class="text-[#FF008C]">Status</span></h2>
-            <div class="max-w-3xl mx-auto">
-                <div class="bg-black/30 border border-pink-500/20 p-8 rounded-lg backdrop-blur-sm box-glow">
-                    <ul class="space-y-4 text-gray-300">
-                        <li><span class="font-bold text-yellow-400">[IN PROGRESS]</span> Simulation of the core Neural Mesh layer.</li>
-                        <li><span class="font-bold text-yellow-400">[IN PROGRESS]</span> UI/UX mockups and component library for the dashboard.</li>
-                        <li><span class="font-bold text-cyan-400">[PLANNED]</span> Development of the Quantum Identity simulation module.</li>
-                        <li><span class="font-bold text-cyan-400">[PLANNED]</span> API design for Digital Twin synchronization.</li>
-                        <li><span class="font-bold text-gray-500">[BACKLOG]</span> Research into Post-Shor encryption algorithms for the simulation.</li>
-                    </ul>
+        <section id="status" class="container mx-auto px-6 py-24 fade-in-section">
+            <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Feature Roadmap <span class="text-[#FF008C]">Status</span></h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-black/30 border border-pink-500/20 p-8 rounded-lg backdrop-blur-sm box-glow interactive-card overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-pink-500/50">TECHNOLOGY</th>
+                                <th class="py-2 px-4 border-b border-pink-500/50">TARGET CAPABILITY</th>
+                                <th class="py-2 px-4 border-b border-pink-500/50">STATUS</th>
+                                <th class="py-2 px-4 border-b border-pink-500/50">NOTES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-2 px-4"><strong>🔮 Quantum DNA</strong></td><td class="py-2 px-4">Unique quantum fingerprints</td><td class="py-2 px-4">🔬 ALPHA</td><td class="py-2 px-4">Early-stage ID lattice tested in lab conditions</td></tr>
+                            <tr><td class="py-2 px-4"><strong>🧠 Hive Mind Network</strong></td><td class="py-2 px-4">Collective intelligence</td><td class="py-2 px-4">🚧 DEV</td><td class="py-2 px-4">Mesh only scales to ~50 nodes currently</td></tr>
+                            <tr><td class="py-2 px-4"><strong>⚡ Lightning Healing</strong></td><td class="py-2 px-4">Auto-repair breaches</td><td class="py-2 px-4">⏳ PLANNED</td><td class="py-2 px-4">No stable implementation yet</td></tr>
+                            <tr><td class="py-2 px-4"><strong>🌀 Reality Anchors</strong></td><td class="py-2 px-4">Twin synchronization</td><td class="py-2 px-4">🛠️ PROTOTYPE</td><td class="py-2 px-4">Early desync issues under review</td></tr>
+                            <tr><td class="py-2 px-4"><strong>🌌 Multiverse Backup</strong></td><td class="py-2 px-4">Cross-dimensional redundancy</td><td class="py-2 px-4">🟠 CONCEPT</td><td class="py-2 px-4">Long-term research direction only</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -145,34 +240,27 @@
         <div class="section-divider"></div>
 
         <!-- Project Roadmap Section -->
-        <section id="roadmap" class="container mx-auto px-6 py-16 fade-in-section">
-            <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Project <span class="text-[#FF008C]">Roadmap</span></h2>
-            <div class="max-w-4xl mx-auto text-gray-300">
-                <div class="border-l-2 border-pink-500/50 pl-8 space-y-12">
-                    <!-- Roadmap Item 1 -->
-                    <div class="relative">
-                        <div class="absolute -left-10 h-5 w-5 rounded-full bg-[#FF008C] box-glow"></div>
-                        <h3 class="text-xl font-orbitron font-bold text-white mb-2">Phase 1: Core Simulation (Current)</h3>
-                        <p>Focus on building and validating the non-quantum backend components. This includes simulating the neural network'''s learning capabilities and the data synchronization between a physical asset and its digital twin.</p>
-                    </div>
-                    <!-- Roadmap Item 2 -->
-                    <div class="relative">
-                        <div class="absolute -left-10 h-5 w-5 rounded-full bg-gray-600"></div>
-                        <h3 class="text-xl font-orbitron font-bold text-white mb-2">Phase 2: UI/UX & Interactive Mockups</h3>
-                        <p>Develop a high-fidelity, interactive frontend that connects to the simulated backend. This will allow for demonstrations of the user experience and the system's conceptual capabilities.</p>
-                    </div>
-                    <!-- Roadmap Item 3 -->
-                    <div class="relative">
-                        <div class="absolute -left-10 h-5 w-5 rounded-full bg-gray-600"></div>
-                        <h3 class="text-xl font-orbitron font-bold text-white mb-2">Phase 3: Quantum Simulation Module</h3>
-                        <p>Begin theoretical work and development of a simulated quantum identity and encryption layer. This phase is research-heavy and will focus on modeling the principles rather than true quantum computation.</p>
-                    </div>
-                     <!-- Roadmap Item 4 -->
-                    <div class="relative">
-                        <div class="absolute -left-10 h-5 w-5 rounded-full bg-gray-600"></div>
-                        <h3 class="text-xl font-orbitron font-bold text-white mb-2">Phase 4: Integration & Public Demo</h3>
-                        <p>Combine the simulated backend, the UI, and the quantum simulation module into a comprehensive demonstration package to showcase the full R.A.T.C.H.E.T. platform.</p>
-                    </div>
+        <section id="roadmap" class="container mx-auto px-6 py-24 fade-in-section">
+            <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Roadmap to <span class="text-[#FF008C]">Beta</span></h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-black/30 border border-pink-500/20 p-8 rounded-lg backdrop-blur-sm box-glow interactive-card overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b border-pink-500/50">PHASE</th>
+                                <th class="py-2 px-4 border-b border-pink-500/50">FEATURES</th>
+                                <th class="py-2 px-4 border-b border-pink-500/50">TARGET</th>
+                                <th class="py-2 px-4 border-b border-pink-500/50">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-2 px-4"><strong>Alpha 0.8</strong></td><td class="py-2 px-4">Quantum ID prototypes, mesh simulation</td><td class="py-2 px-4">Q3 2023</td><td class="py-2 px-4">✅ Completed</td></tr>
+                            <tr><td class="py-2 px-4"><strong>Alpha 0.9</strong></td><td class="py-2 px-4">Neural mesh scaling, dashboard preview</td><td class="py-2 px-4">Q1 2024</td><td class="py-2 px-4">🚧 In Progress</td></tr>
+                            <tr><td class="py-2 px-4"><strong>Beta 1.0</strong></td><td class="py-2 px-4">Stable sync + predictive engine</td><td class="py-2 px-4">Q3 2024</td><td class="py-2 px-4">🛠️ Upcoming</td></tr>
+                            <tr><td class="py-2 px-4"><strong>Beta 2.0</strong></td><td class="py-2 px-4">Lightning Healing, Hive Mind scaling</td><td class="py-2 px-4">Q1 2025</td><td class="py-2 px-4">🟠 Planned</td></tr>
+                            <tr><td class="py-2 px-4"><strong>Release Candidate</strong></td><td class="py-2 px-4">Industrial pilot deployments</td><td class="py-2 px-4">Q4 2025</td><td class="py-2 px-4">🔮 Future</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
@@ -180,28 +268,71 @@
         <div class="section-divider"></div>
 
         <!-- Core Technologies Section -->
-        <section id="tech-stack" class="container mx-auto px-6 py-16 fade-in-section">
-            <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Core <span class="text-[#FF008C]">Technology</span></h2>
-            <p class="text-center text-lg text-gray-300 max-w-3xl mx-auto mb-12">
-                R.A.T.C.H.E.T. is built upon a multi-layered architecture that combines cutting-edge technologies in decentralized identity, quantum security, and artificial intelligence. The foundation of this architecture is the Key Event Receipt Infrastructure (KERI), providing a secure and verifiable identity layer.
-            </p>
+        <section id="tech-stack" class="container mx-auto px-6 py-24 fade-in-section">
+            <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Core <span class="text-[#FF008C]">Technologies</span></h2>
+            <div class="text-center max-w-3xl mx-auto">
+                <pre class="mermaid bg-black/30 border border-pink-500/20 p-8 rounded-lg backdrop-blur-sm box-glow interactive-card">
+graph TB
+    subgraph "🌀 QUANTUM LAYER (Prototype)"
+        A["Quantum IDs (unstable)"]
+        B[Experimental Post-Shor Keys]
+        C[Quantum Key Simulation]
+    end
+    
+    subgraph "🧠 NEURAL LAYER (Beta)"
+        D[Limited Collective Learning]
+        E[Supervised Training]
+        F[Prediction Sandbox]
+    end
+    
+    subgraph "⚡ REALITY LAYER (Future)"
+        G[Basic Digital Twin Sync]
+        H[Consensus Prototype]
+        I["Temporal Debugging (Planned)"]
+    end
+    
+    A -->|Unstable Tunneling| D
+    B -->|Experimental Encryption| E
+    C -->|Simulated Distribution| F
+    
+    D -->|Partial Neural Pathways| G
+    E -->|Feedback Loops| H
+    F -->|Sandbox Predictions| I
+    
+    style A fill:#ff9f6b,stroke:#fff,stroke-width:2px,color:#000
+    style D fill:#c4ecdc,stroke:#fff,stroke-width:2px,color:#000
+    style G fill:#a5c7d1,stroke:#fff,stroke-width:2px,color:#000
+                </pre>
+            </div>
+        </section>
 
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto text-gray-300">
-                <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg backdrop-blur-sm">
-                    <h3 class="text-xl font-orbitron font-bold text-white mb-3"><span class="text-[#8a2be2]">KERIA</span>: Identity & Trust Layer</h3>
-                    <p>The foundation of R.A.T.C.H.E.T. is built on KERIA, providing a decentralized, self-certifying identity framework. This ensures that every component, physical or digital, has a portable, secure, and unambiguous identity, forming the root of trust for the entire system.</p>
-                </div>
-                <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg backdrop-blur-sm">
-                    <h3 class="text-xl font-orbitron font-bold text-white mb-3"><span class="text-[#ff6b6b]">Quantum</span>: Security Layer</h3>
-                    <p>This layer leverages principles of quantum mechanics to provide unparalleled security. This includes quantum-entangled identifiers and post-Shor encryption simulations, creating a theoretically unbreakable link between identities and communications.</p>
-                </div>
-                <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg backdrop-blur-sm">
-                    <h3 class="text-xl font-orbitron font-bold text-white mb-3"><span class="text-[#4ecdc4]">Neural</span>: Intelligence Layer</h3>
-                    <p>A simulated neural mesh that enables collective intelligence and autonomous learning. The system can detect anomalies, predict failures, and adapt its understanding of the physical world in real-time, mimicking a form of industrial consciousness.</p>
-                </div>
-                <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg backdrop-blur-sm">
-                    <h3 class="text-xl font-orbitron font-bold text-white mb-3"><span class="text-[#45b7d1]">Reality</span>: Digital Twin Layer</h3>
-                    <p>This layer maintains a high-fidelity, real-time digital twin of physical assets. It uses a consensus mechanism to ensure the digital representation is an accurate reflection of reality, and allows for 'temporal debugging'—reviewing past states to understand events.</p>
+        <div class="section-divider"></div>
+
+        <!-- Developer Ecosystem Section -->
+        <section id="developer-ecosystem" class="container mx-auto px-6 py-24 fade-in-section">
+            <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Developer <span class="text-[#FF008C]">Ecosystem</span></h2>
+            <div class="max-w-3xl mx-auto">
+                <p class="text-center text-lg text-gray-300 mb-8">
+                    The SDK is in <strong>very early alpha</strong>. Expect breaking changes, missing features, and placeholder APIs.
+                </p>
+                <div class="bg-black/30 border border-pink-500/20 p-4 rounded-lg backdrop-blur-sm box-glow interactive-card">
+                    <pre><code class="language-typescript text-sm">
+// Experimental quantum-native asset registration
+import { QuantumAsset } from '@ratchet/experimental';
+
+const roboticArm = new QuantumAsset({
+  id: 'TEST-001',
+  consciousness: 'mock',
+  entanglement: 'demo-pair-001',
+  prediction: {
+    horizon: '24h',
+    accuracy: 0.21, // unstable
+    selfHealing: false
+  }
+});
+
+await roboticArm.establishTwinBond({ reality: 'simulation' });
+                    </code></pre>
                 </div>
             </div>
         </section>
@@ -211,14 +342,15 @@
     <!-- Footer -->
     <footer id="contact" class="bg-black/50 border-t border-pink-500/20 mt-20">
         <div class="container mx-auto px-6 py-12 text-center text-gray-400">
-            <h3 class="text-2xl font-orbitron text-white mb-4">About This Project</h3>
-            <p class="max-w-md mx-auto mb-8">R.A.T.C.H.E.T. is a project under active development, exploring future-facing technologies. The code in this repository is for building out the simulations and user interface that bring the project to life.</p>
+            <h3 class="text-2xl font-orbitron text-white mb-4">Contact & <span class="text-[#FF008C]">Participation</span></h3>
+            <p class="max-w-md mx-auto mb-8">
+                RATCHET is <strong>not production-ready</strong>. Developers, researchers, and quantum enthusiasts are welcome to contribute.
+            </p>
             <div class="flex justify-center space-x-6 mb-8">
-                <a href="#" class="hover:text-[#FF008C] transition-colors"><svg role="img" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>X</title><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>
-                <a href="#" class="hover:text-[#FF008C] transition-colors"><svg role="img" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-                <a href="#" class="hover:text-[#FF008C] transition-colors"><svg role="img" width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><title>Discord</title><path d="M21.546 2.656a.42.42 0 0 0-.34-.186H2.783a.42.42 0 0 0-.34.186.414.414 0 0 0-.05.411S4.33 13.978 4.33 14.248c0 .27-.333.54-.333.54S2.13 16.54 2.08 16.79a.412.412 0 0 0 .04.41.42.42 0 0 0 .35-.19h19.06a.42.42 0 0 0 .35-.19.412.412 0 0 0 .04-.41c-.05-.25-2.25-1.75-2.25-1.75s-.333-.27-.333-.54c0-.27 1.943-11.187 1.943-11.187a.414.414 0 0 0-.05-.411Zm-3.23 11.028c-1.385 1.22-3.21 1.91-3.21 1.91s-.38.29-.7.04c-.32-.25-.21-.62-.21-.62s.82-1.04 1.2-1.65c-.88.3-1.8.5-2.81.5-1.01 0-1.93-.2-2.81-.5.38.61 1.2 1.65 1.2 1.65s.s11.37-.21.62c-.32.25-.7-.04-.7-.04s-1.825-.69-3.21-1.91c0-.02 1.4-6.35 1.4-6.35s.22-.8.89-.83c.67-.03.85.73.85.73l.53 2.12c1.03-.49 2.1-.73 3.21-.73s2.18.24 3.21.73l.53-2.12s.18-.76.85-.73c.67.03.89.83.89.83s1.4 6.33 1.4 6.35Z"/></svg></a>
+                <a href="https://quantum.ratchet.nexus" target="_blank" class="hover:text-[#FF008C] transition-colors">🌐 Portal (sandbox only)</a>
             </div>
             <p class="text-sm">&copy; 2025 Elykid Private Limited. A project in active development.</p>
+            <p class="text-xs mt-4">STARDATE 2387.09.18 | CONSCIOUSNESS LEVEL: DEVELOPMENTAL</p>
         </div>
     </footer>
 
@@ -241,6 +373,19 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
+                    
+                    // Staggered list animation
+                    const listItems = entry.target.querySelectorAll('.staggered-list li');
+                    listItems.forEach((item, index) => {
+                        item.style.transitionDelay = `${index * 150}ms`;
+                    });
+
+                    // Staggered card animation
+                    const cardItems = entry.target.querySelectorAll('.staggered-card');
+                    cardItems.forEach((item, index) => {
+                        item.style.transitionDelay = `${index * 150}ms`;
+                    });
+
                     observer.unobserve(entry.target);
                 }
             });
