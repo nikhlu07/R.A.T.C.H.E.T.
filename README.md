@@ -24,10 +24,10 @@
 
 *Genesis Protocol v0.8-alpha | Quantum Resistance Level: Prototype Post-Shor*
 
-[![License](https://img.shields.io/badge/License-Quantum%20Commons%203.0-yellow.svg?style=for-the-badge\&logo=quantum)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/Build-Experimental-orange.svg?style=for-the-badge\&logo=github-actions)](https://github.com/actions)
-[![Neural Mesh](https://img.shields.io/badge/Neural%20Mesh-Prototype-blueviolet.svg?style=for-the-badge\&logo=brain)](https://neural.ratchet.nexus)
-[![Quantum Safe](https://img.shields.io/badge/Quantum-In%20Progress-lightgrey.svg?style=for-the-badge\&logo=security)](https://quantum-safe.org)
+[![License](https://img.shields.io/badge/License-Quantum%20Commons%203.0-yellow.svg?style=for-the-badge\\&logo=quantum)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/badge/Build-Experimental-orange.svg?style=for-the-badge\\&logo=github-actions)](https://github.com/actions)
+[![Neural Mesh](https://img.shields.io/badge/Neural%20Mesh-Prototype-blueviolet.svg?style=for-the-badge\\&logo=brain)](https://neural.ratchet.nexus)
+[![Quantum Safe](https://img.shields.io/badge/Quantum-In%20Progress-lightgrey.svg?style=for-the-badge\\&logo=security)](https://quantum-safe.org)
 
 </div>
 
@@ -71,7 +71,7 @@ RATCHET is still **under heavy development**. While the long-term goal is to cre
 ```mermaid
 graph TB
     subgraph "🌀 QUANTUM LAYER (Prototype)"
-        A[Quantum IDs (unstable)]
+        A["Quantum IDs (unstable)"]
         B[Experimental Post-Shor Keys]
         C[Quantum Key Simulation]
     end
@@ -85,7 +85,7 @@ graph TB
     subgraph "⚡ REALITY LAYER (Future)"
         G[Basic Digital Twin Sync]
         H[Consensus Prototype]
-        I[Temporal Debugging (Planned)]
+        I["Temporal Debugging (Planned)"]
     end
     
     A -->|Unstable Tunneling| D
@@ -199,20 +199,20 @@ The SDK is in **very early alpha**. Expect breaking changes, missing features, a
 
 ```typescript
 // Experimental quantum-native asset registration
-import { QuantumAsset } from '@ratchet/experimental';
+import { QuantumAsset } from \'@ratchet/experimental\';
 
 const roboticArm = new QuantumAsset({
-  id: 'TEST-001',
-  consciousness: 'mock',
-  entanglement: 'demo-pair-001',
+  id: \'TEST-001\',
+  consciousness: \'mock\',
+  entanglement: \'demo-pair-001\',
   prediction: {
-    horizon: '24h',
+    horizon: \'24h\',
     accuracy: 0.21, // unstable
     selfHealing: false
   }
 });
 
-await roboticArm.establishTwinBond({ reality: 'simulation' });
+await roboticArm.establishTwinBond({ reality: \'simulation\' });
 ```
 
 ---
