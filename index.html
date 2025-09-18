@@ -156,25 +156,36 @@
             align-items: center;
         }
 
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+
         #boot-logo {
             width: 80px;
             height: 80px;
-            opacity: 0;
-            transition: opacity 1s ease-in;
             margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
         }
 
         #boot-text-container {
             width: 100%;
+            text-align: center;
         }
 
-        .boot-sequence p {
-            margin: 0 0 5px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
+        #boot-status {
+            margin: 0 0 15px 0;
             font-size: 0.9rem;
             color: #FF008C;
+            transition: opacity 0.2s ease-in-out;
+            height: 1.2em;
+            text-align: center;
         }
 
         .progress-bar {
@@ -202,10 +213,8 @@
                 height: 60px;
             }
 
-            .boot-sequence p {
+            #boot-status {
                 font-size: 0.7rem;
-                white-space: normal;
-                word-break: break-word;
             }
         }
 
@@ -218,12 +227,7 @@
         <div class="boot-sequence">
             <img src="logo.svg" alt="R.A.T.C.H.E.T. Logo" id="boot-logo">
             <div id="boot-text-container">
-                <p id="line1"></p>
-                <p id="line2"></p>
-                <p id="line3"></p>
-                <p id="line4"></p>
-                <p id="line5"></p>
-                <p id="line6"></p>
+                <p id="boot-status"></p>
                 <div class="progress-bar">
                     <div class="progress-bar-inner"></div>
                 </div>
@@ -492,64 +496,48 @@ await roboticArm.establishTwinBond({ reality: '''simulation''' });
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const bootLogo = document.getElementById('boot-logo');
-            const bootTextContainer = document.getElementById('boot-text-container');
+            const bootStatus = document.getElementById('boot-status');
             const progressBar = document.querySelector('.progress-bar-inner');
             const loader = document.getElementById('loader');
             const content = document.getElementById('content');
 
-            const LOGO_FADE_IN_START = 250;
-            const TEXT_ANIMATION_START = 750;
-            const TEXT_ANIMATION_DURATION = 2500;
-            const TOTAL_BOOT_TIME = TEXT_ANIMATION_START + TEXT_ANIMATION_DURATION;
+            const bootMessages = [
+                'INITIATING R.A.T.C.H.E.T. PROTOCOL...',
+                'QUANTUM-LINK ESTABLISHED...',
+                'VERIFYING DIGITAL TWIN SIGNATURE...',
+                'LOADING NEURAL MESH...',
+                'CALIBRATING REALITY ANCHORS...',
+                'SYSTEM ONLINE. WELCOME.'
+            ];
 
-            bootTextContainer.style.visibility = 'hidden';
+            const MESSAGE_INTERVAL = 300;
+            const TOTAL_BOOT_TIME = bootMessages.length * MESSAGE_INTERVAL;
 
-            function typeLine(line, lineDelay) {
-                const el = document.getElementById(line.id);
-                setTimeout(() => {
-                    let i = 0;
-                    el.style.width = 'auto'; // Reset width before typing
-                    el.innerText = ''; // Clear previous text
-                    const typing = setInterval(() => {
-                        if (i < line.text.length) {
-                            el.innerText += line.text.charAt(i);
-                            i++;
-                        } else {
-                            clearInterval(typing);
-                        }
-                    }, 15);
-                }, lineDelay);
-            }
+            let messageIndex = 0;
 
-            // 1. Fade in logo
-            setTimeout(() => {
-                bootLogo.style.opacity = '1';
-            }, LOGO_FADE_IN_START);
+            // Animate boot sequence
+            const bootInterval = setInterval(() => {
+                if (messageIndex < bootMessages.length) {
+                    // Update status text
+                    bootStatus.style.opacity = '0';
+                    setTimeout(() => {
+                        bootStatus.textContent = bootMessages[messageIndex];
+                        bootStatus.style.opacity = '1';
+                    }, 150);
 
-            // 2. Start text animation
-            setTimeout(() => {
-                bootTextContainer.style.visibility = 'visible';
-                const lines = [
-                    { id: 'line1', text: 'INITIATING R.A.T.C.H.E.T. PROTOCOL...' },
-                    { id: 'line2', text: 'QUANTUM-LINK ESTABLISHED. SECURING CONNECTION...' },
-                    { id: 'line3', text: 'VERIFYING DIGITAL TWIN SIGNATURE...' },
-                    { id: 'line4', text: 'LOADING NEURAL MESH...' },
-                    { id: 'line5', text: 'CALIBRATING REALITY ANCHORS...' },
-                    { id: 'line6', text: 'SYSTEM ONLINE. WELCOME.' }
-                ];
+                    // Update progress bar
+                    const progress = ((messageIndex + 1) / bootMessages.length) * 100;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    messageIndex++;
+                } else {
+                    clearInterval(bootInterval);
+                }
+            }, MESSAGE_INTERVAL);
 
-                lines.forEach((line, index) => {
-                    typeLine(line, index * 400);
-                });
+            progressBar.style.transition = `width ${MESSAGE_INTERVAL}ms linear`;
 
-                progressBar.style.transition = `width ${TEXT_ANIMATION_DURATION}ms linear`;
-                progressBar.style.width = '100%';
-
-            }, TEXT_ANIMATION_START);
-
-
-            // 3. Hide loader when done
+            // Hide loader when done
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     loader.style.opacity = '0';
@@ -557,7 +545,7 @@ await roboticArm.establishTwinBond({ reality: '''simulation''' });
                         loader.style.display = 'none';
                         content.style.display = 'block';
                     }, 500); // fade out duration
-                }, TOTAL_BOOT_TIME);
+                }, TOTAL_BOOT_TIME + 500); // Add a small buffer
             });
         });
 
