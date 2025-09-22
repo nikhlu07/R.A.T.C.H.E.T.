@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R.A.T.C.H.E.T.</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <link rel="icon" type="image/png" href="logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Disket+Mono&display=swap" rel="stylesheet">
+
     <style>
         /* Custom Styles for the futuristic theme */
         body {
             background-color: #050505;
             color: #E0E0E0;
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'Disket Mono', monospace;
+            background-image: radial-gradient(rgba(255, 0, 140, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
         .font-orbitron {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Disket Mono', monospace; /* Replaced Orbitron */
         }
 
         .text-glow {
             text-shadow: 0 0 8px #FF008C, 0 0 12px #FF008C;
+        }
+
+        .header-glow {
+             text-shadow: 0 0 6px #FF008C;
         }
 
         .box-glow {
@@ -39,11 +44,10 @@
             width: 80%;
             animation: divider-scan 8s linear infinite;
         }
-        
+
         @keyframes divider-scan {
-            0% { background: linear-gradient(90deg, transparent, #FF008C, transparent); }
-            50% { background: linear-gradient(270deg, transparent, #FF008C, transparent); }
-            100% { background: linear-gradient(90deg, transparent, #FF008C, transparent); }
+            0% { background-position: -100% 0; }
+            100% { background-position: 100% 0; }
         }
 
         /* Animation for elements fading in on scroll */
@@ -59,23 +63,21 @@
         }
 
         .ascii-art {
-            font-size: 0.5rem; /* Adjusted for smaller screens */
-            line-height: 1;
-            letter-spacing: 0.1em;
+            font-size: 1rem; /* Base for desktop */
+            line-height: 1.4;
             text-shadow: 0 0 5px rgba(255, 0, 140, 0.7);
             color: #FF008C;
             background: rgba(10, 10, 10, 0.3);
-            padding: 1rem;
-            border: 1px solid rgba(255, 0, 140, 0.2);
-            border-radius: 8px;
-            overflow-x: auto;
+            padding: 1.5rem;
+            white-space: pre;
             animation: flicker 3s linear infinite;
+            width: max-content;
+            max-width: 100%;
         }
 
-        @media (min-width: 768px) {
-            .ascii-art {
-                font-size: 0.75rem;
-            }
+        .hero-ascii {
+            font-size: 0.9rem;
+            line-height: 1.3;
         }
 
         @keyframes flicker {
@@ -85,7 +87,7 @@
             51.5% { opacity: 0.8; text-shadow: 0 0 12px rgba(255, 0, 140, 1); }
             52% { opacity: 1; text-shadow: 0 0 5px rgba(255, 0, 140, 0.7); }
         }
-        
+
         .button-glow {
             box-shadow: 0 0 15px rgba(255, 0, 140, 0.5), 0 0 5px rgba(255, 0, 140, 0.7);
             animation: button-glow 2s ease-in-out infinite alternate;
@@ -103,21 +105,18 @@
         /* Interactive card animation */
         .interactive-card {
             transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            background: rgba(10, 10, 10, 0.4);
+            border: 1px solid rgba(255, 0, 140, 0.2);
+            backdrop-filter: blur(10px);
         }
         .interactive-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 0 30px rgba(255, 0, 140, 0.7), 0 0 15px rgba(255, 0, 140, 0.9);
+            border-color: rgba(255, 0, 140, 0.5);
         }
 
-        /* Staggered list animation */
-        .staggered-list li {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .is-visible .staggered-list li {
-            opacity: 1;
-            transform: translateX(0);
+        .icon-glow {
+            filter: drop-shadow(0 0 8px rgba(255, 0, 140, 0.8));
         }
 
         /* Staggered card animation */
@@ -150,21 +149,15 @@
         .boot-sequence {
             width: 80%;
             max-width: 600px;
-            font-family: 'Roboto Mono', monospace;
+            font-family: 'Disket Mono', monospace;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 1;
-            }
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
         }
 
         #boot-logo {
@@ -204,17 +197,17 @@
         }
 
         @media (max-width: 768px) {
-            .boot-sequence {
-                width: 90%;
+            .boot-sequence { width: 90%; }
+            #boot-logo { width: 60px; height: 60px; }
+            #boot-status { font-size: 0.7rem; }
+            .ascii-art { font-size: 0.9rem; line-height: 1.3; }
+            .hero-ascii {
+                font-size: 1.2vw;
+                line-height: 1.2;
             }
-
-            #boot-logo {
-                width: 60px;
-                height: 60px;
-            }
-
-            #boot-status {
-                font-size: 0.7rem;
+            .grid {
+                grid-template-columns: 1fr;
+                justify-items: center;
             }
         }
 
@@ -223,6 +216,7 @@
 </head>
 <body class="overflow-x-hidden">
 
+    <!-- LOADER -->
     <div id="loader">
         <div class="boot-sequence">
             <img src="logo.svg" alt="R.A.T.C.H.E.T. Logo" id="boot-logo">
@@ -235,266 +229,340 @@
         </div>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div id="content" style="display:none;">
         <!-- Header -->
         <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-sm border-b border-pink-500/20 transition-all duration-300 fade-in-section" style="transition-delay: 100ms;">
             <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                 <img id="header-logo" src="logo.svg" alt="R.A.T.C.H.E.T. Logo" class="h-8 opacity-0 md:opacity-100 transition-opacity duration-300">
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#vision" class="hover:text-[#FF008C] transition-colors duration-300">Vision</a>
-                    <a href="#status" class="hover:text-[#FF008C] transition-colors duration-300">Status</a>
+                    <a href="#problem" class="hover:text-[#FF008C] transition-colors duration-300">The Problem</a>
+                    <a href="#solution" class="hover:text-[#FF008C] transition-colors duration-300">The Solution</a>
+                    <a href="#how-it-works" class="hover:text-[#FF008C] transition-colors duration-300">How It Works</a>
+                    <a href="#market" class="hover:text-[#FF008C] transition-colors duration-300">Market</a>
                     <a href="#roadmap" class="hover:text-[#FF008C] transition-colors duration-300">Roadmap</a>
-                    <a href="#tech-stack" class="hover:text-[#FF008C] transition-colors duration-300">Tech Stack</a>
-                    <a href="#contact" class="hover:text-[#FF008C] transition-colors duration-300">About</a>
+<!--                    <a href="#contact" class="hover:text-[#FF008C] transition-colors duration-300">Contact</a>-->
                 </nav>
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-white focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                     </button>
                 </div>
             </div>
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden">
                 <nav class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
-                    <a href="#vision" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">Vision</a>
-                    <a href="#status" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">Status</a>
+                     <a href="#problem" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">The Problem</a>
+                    <a href="#solution" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">The Solution</a>
+                    <a href="#how-it-works" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">How It Works</a>
+                    <a href="#market" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">Market</a>
                     <a href="#roadmap" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">Roadmap</a>
-                    <a href="#tech-stack" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">Tech Stack</a>
-                    <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">About</a>
+                    <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#FF008C] hover:bg-gray-700">Contact</a>
                 </nav>
             </div>
         </header>
 
         <main class="pt-20 md:pt-24">
-            <!-- Hero Section -->
+            <!-- Hero Section (UNCHANGED) -->
             <section id="hero" class="container mx-auto px-6 py-24 sm:py-32 md:py-40 text-center fade-in-section" style="transition-delay: 300ms;">
-                <div class="max-w-4xl mx-auto">
+                <div class="max-w-4xl mx-auto text-center">
                     <img id="hero-logo" src="logo.svg" alt="R.A.T.C.H.E.T. Logo" class="h-28 mx-auto mb-8 md:hidden">
-                    <pre class="ascii-art mx-auto mt-8 w-full max-w-2xl">
-
- ______  _______ _______ _______ _     _ _______ _______
-(_____ \(_______|_______|_______|_)   (_|_______|_______)
- _____) )_______    _    _       _______ _____      _
-|  __  /|  ___  |  | |  | |     |  ___  |  ___)    | |
-| |  \ \| |   | |  | |  | |_____| |   | | |_____   | |
-|_|   |_|_|   |_|  |_|   \______)_|   |_|_______)  |_|
-
-                </pre>
-                    <p class="mt-4 text-lg md:text-2xl text-[#FF008C] font-bold text-glow">
+                    <pre class="ascii-art hero-ascii mt-8 mx-auto text-left">__________        _____     ____________________       ___ ___     ___________  ___________
+\______   \      /  _  \    \__    ___/\_   ___ \     /   |   \    \_   _____/  \__    ___/
+ |       _/     /  /_\  \     |    |   /    \  \/    /    ~    \    |    __)_     |    |
+ |    |   \    /    |    \    |    |   \     \____   \    Y    /    |        \    |    |
+ |____|_  / /\ \____|__  / /\ |____| /\ \______  / /\ \___|_  / /\ /_______  / /\ |____| /\
+        \/  \/         \/  \/        \/        \/  \/       \/  \/         \/  \/        \/ </pre>
+                    <p class="mt-4 text-lg sm:text-xl md:text-2xl text-[#FF008C] font-bold text-glow">
                         Real-time Autonomous Twin Component Health Evaluation Technology
                     </p>
-    <!--                <p class="mt-6 text-base md:text-lg text-gray-300 max-w-2xl mx-auto">-->
-    <!--                    R.A.T.C.H.E.T. is a quantum-secured industrial consciousness platform that creates an unbreakable bond between physical machinery and their digital souls. We are building the future of industrial reality.-->
-    <!--                </p>-->
-                    <a href="#vision" class="mt-10 inline-block bg-[#FF008C] text-black font-bold py-3 px-8 rounded-md uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#FF008C] button-glow transform hover:scale-105">
-                        Explore the Vision
+                    <a href="#problem" class="mt-10 inline-block bg-[#FF008C] text-black font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-md uppercase tracking-widest transition-all duration-300 hover:bg-white hover:text-[#FF008C] button-glow transform hover:scale-105">
+                        Discover the Future
                     </a>
                 </div>
             </section>
+
             <div class="section-divider"></div>
 
-            <!-- Executive Vision Section -->
-            <section id="vision" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
+            <!-- The Problem Section (ASCII) -->
+            <section id="problem" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
                 <div class="text-center max-w-5xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white mb-12">Executive <span class="text-[#FF008C]">Vision</span></h2>
-                    <p class="text-lg text-gray-300 mb-12">RATCHET is a pre-alpha platform focused on three core proofs-of-concept:</p>
-                    
-                    <!-- Core Concepts -->
-                    <div class="grid md:grid-cols-3 gap-8 mb-16 staggered-card-container">
-                        <!-- Card 1 -->
-                        <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg interactive-card staggered-card">
-                            <h3 class="text-xl font-orbitron text-white mb-3">Quantum Identity</h3>
-                            <p class="text-gray-400">Quantum-entangled digital identity verification for unbreakable security.</p>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg interactive-card staggered-card">
-                            <h3 class="text-xl font-orbitron text-white mb-3">Neural Prototypes</h3>
-                            <p class="text-gray-400">Early-stage neural mesh networks for collective machine consciousness.</p>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="bg-black/30 border border-pink-500/20 p-6 rounded-lg interactive-card staggered-card">
-                            <h3 class="text-xl font-orbitron text-white mb-3">Predictive Simulation</h3>
-                            <p class="text-gray-400">Preliminary simulations to predict and prevent industrial failures.</p>
-                        </div>
-                    </div>
+                    <pre class="ascii-art mb-4 mx-auto text-left overflow-x-auto">
+  ___ ___  ___  ___ _    ___ __  __
+ | _ \ _ \/ _ \| _ ) |  | __|  \/  |
+ |  _/   / (_) | _ \ |__| _|| |\/| |
+ |_| |_|_\\___/|___/____|___|_|  |_|
 
-                    <!-- Challenge vs. Goal -->
-                    <div class="grid md:grid-cols-2 gap-8 text-left">
-                        <div class="bg-black/30 border border-yellow-500/30 p-6 rounded-lg interactive-card">
-                            <h3 class="text-2xl font-orbitron text-yellow-400 mb-4">🚨 The Present Challenge</h3>
-                            <p class="text-gray-300">Industrial systems produce overwhelming data. Our prototype shows predictive security is possible, but results are still experimental and require refinement.</p>
-                        </div>
-                        <div class="bg-black/30 border border-green-500/30 p-6 rounded-lg interactive-card">
-                            <h3 class="text-2xl font-orbitron text-green-400 mb-4">⚡ The Long-Term Goal</h3>
-                            <p class="text-gray-300">To establish a fully functional Verified Reality Architecture, where physical machinery and its digital twin are in continuous, secure synchronization.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="section-divider"></div>
-
-            <!-- Development Status Section -->
-            <section id="status" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
-                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Feature Roadmap <span class="text-[#FF008C]">Status</span></h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="bg-black/30 border border-pink-500/20 p-8 rounded-lg backdrop-blur-sm box-glow interactive-card overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">TECHNOLOGY</th>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">TARGET CAPABILITY</th>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">STATUS</th>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">NOTES</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="py-2 px-4"><strong>🔮 Quantum DNA</strong></td><td class="py-2 px-4">Unique quantum fingerprints</td><td class="py-2 px-4">🔬 ALPHA</td><td class="py-2 px-4">Early-stage ID lattice tested in lab conditions</td></tr>
-                                <tr><td class="py-2 px-4"><strong>🧠 Hive Mind Network</strong></td><td class="py-2 px-4">Collective intelligence</td><td class="py-2 px-4">🚧 DEV</td><td class="py-2 px-4">Mesh only scales to ~50 nodes currently</td></tr>
-                                <tr><td class="py-2 px-4"><strong>⚡ Lightning Healing</strong></td><td class="py-2 px-4">Auto-repair breaches</td><td class="py-2 px-4">⏳ PLANNED</td><td class="py-2 px-4">No stable implementation yet</td></tr>
-                                <tr><td class="py-2 px-4"><strong>🌀 Reality Anchors</strong></td><td class="py-2 px-4">Twin synchronization</td><td class="py-2 px-4">🛠️ PROTOTYPE</td><td class="py-2 px-4">Early desync issues under review</td></tr>
-                                <tr><td class="py-2 px-4"><strong>🌌 Multiverse Backup</strong></td><td class="py-2 px-4">Cross-dimensional redundancy</td><td class="py-2 px-4">🟠 CONCEPT</td><td class="py-2 px-4">Long-term research direction only</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <div class="section-divider"></div>
-
-            <!-- Project Roadmap Section -->
-            <section id="roadmap" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
-                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Roadmap to <span class="text-[#FF008C]">Beta</span></h2>
-                <div class="max-w-4xl mx-auto">
-                    <div class="bg-black/30 border border-pink-500/20 p-8 rounded-lg backdrop-blur-sm box-glow interactive-card overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">PHASE</th>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">FEATURES</th>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">TARGET</th>
-                                    <th class="py-2 px-4 border-b border-pink-500/50">STATUS</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="py-2 px-4"><strong>Alpha 0.8</strong></td><td class="py-2 px-4">Quantum ID prototypes, mesh simulation</td><td class="py-2 px-4">Q3 2023</td><td class="py-2 px-4">✅ Completed</td></tr>
-                                <tr><td class="py-2 px-4"><strong>Alpha 0.9</strong></td><td class="py-2 px-4">Neural mesh scaling, dashboard preview</td><td class="py-2 px-4">Q1 2024</td><td class="py-2 px-4">🚧 In Progress</td></tr>
-                                <tr><td class="py-2 px-4"><strong>Beta 1.0</strong></td><td class="py-2 px-4">Stable sync + predictive engine</td><td class="py-2 px-4">Q3 2024</td><td class="py-2 px-4">🛠️ Upcoming</td></tr>
-                                <tr><td class="py-2 px-4"><strong>Beta 2.0</strong></td><td class="py-2 px-4">Lightning Healing, Hive Mind scaling</td><td class="py-2 px-4">Q1 2025</td><td class="py-2 px-4">🟠 Planned</td></tr>
-                                <tr><td class="py-2 px-4"><strong>Release Candidate</strong></td><td class="py-2 px-4">Industrial pilot deployments</td><td class="py-2 px-4">Q4 2025</td><td class="py-2 px-4">🔮 Future</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-
-            <div class="section-divider"></div>
-
-            <!-- Core Technologies Section -->
-            <section id="tech-stack" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
-                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Core <span class="text-[#FF008C]">Technologies</span></h2>
-                <div class="text-center max-w-3xl mx-auto">
-                    <div class="overflow-x-auto">
-                        <pre class="mermaid bg-black/30 border border-pink-500/20 p-8 rounded-lg backdrop-blur-sm box-glow interactive-card">
-graph TB
-    subgraph "🌀 QUANTUM LAYER (Prototype)"
-        A["Quantum IDs (unstable)"]
-        B[Experimental Post-Shor Keys]
-        C[Quantum Key Simulation]
-    end
-    
-    subgraph "🧠 NEURAL LAYER (Beta)"
-        D[Limited Collective Learning]
-        E[Supervised Training]
-        F[Prediction Sandbox]
-    end
-    
-    subgraph "⚡ REALITY LAYER (Future)"
-        G[Basic Digital Twin Sync]
-        H[Consensus Prototype]
-        I["Temporal Debugging (Planned)"]
-    end
-    
-    A -->|Unstable Tunneling| D
-    B -->|Experimental Encryption| E
-    C -->|Simulated Distribution| F
-    
-    D -->|Partial Neural Pathways| G
-    E -->|Feedback Loops| H
-    F -->|Sandbox Predictions| I
-    
-    style A fill:#ff9f6b,stroke:#fff,stroke-width:2px,color:#000
-    style D fill:#c4ecdc,stroke:#fff,stroke-width:2px,color:#000
-    style G fill:#a5c7d1,stroke:#fff,stroke-width:2px,color:#000
                     </pre>
+                    <p class="text-lg text-gray-400 mb-12">Industrial systems face unprecedented threats, costing billions annually in downtime and data breaches.</p>
+
+                    <div class="grid md:grid-cols-2 gap-8 staggered-card-container">
+                        <pre class="ascii-art p-4 md:p-6 staggered-card text-left overflow-x-auto" style="transition-delay: 100ms;">
++------------------------------------+
+| <span class="text-red-400">CRIPPLING INSECURITY</span>               |
++------------------------------------+
+| Reactive security measures are     |
+| failing, leaving our critical      |
+| energy, manufacturing, and defense |
+| infrastructure dangerously exposed |
+| to sophisticated cyber-attacks.    |
++------------------------------------+</pre>
+                        <pre class="ascii-art p-4 md:p-6 staggered-card text-left overflow-x-auto" style="transition-delay: 200ms;">
++------------------------------------+
+| <span class="text-yellow-400">UNPREDICTABLE FAILURES</span>             |
++------------------------------------+
+| Current predictive maintenance is  |
+| inadequate. Systems cannot foresee |
+| and prevent critical component     |
+| failures, resulting in expensive   |
+| operational downtime.              |
++------------------------------------+</pre>
                     </div>
                 </div>
             </section>
 
             <div class="section-divider"></div>
 
-            <!-- Developer Ecosystem Section -->
-            <section id="developer-ecosystem" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
-                <h2 class="text-3xl md:text-4xl font-orbitron font-bold text-white text-center mb-12">Developer <span class="text-[#FF008C]">Ecosystem</span></h2>
-                <div class="max-w-3xl mx-auto">
-                    <p class="text-center text-lg text-gray-300 mb-8">
-                        The SDK is in <strong>very early alpha</strong>. Expect breaking changes, missing features, and placeholder APIs.
-                    </p>
-                    <div class="bg-black/30 border border-pink-500/20 p-4 rounded-lg backdrop-blur-sm box-glow interactive-card overflow-x-auto">
-                        <pre><code class="language-typescript text-sm">
-// Experimental quantum-native asset registration
-import { QuantumAsset } from '''@ratchet/experimental''';
+            <!-- The Solution Section (ASCII) -->
+            <section id="solution" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
+                <div class="text-center max-w-5xl mx-auto">
+                    <pre class="ascii-art mb-4 mx-auto text-left overflow-x-auto">
+   ___  _   _ ___   ___  ___  _   _   _ _____ ___ ___  _  _
+  / _ \| | | | _ \ / __|/ _ \| | | | | |_   _|_ _/ _ \| \| |
+ | (_) | |_| |   / \__ \ (_) | |_| |_| | | |  | | (_) | .` |
+  \___/ \___/|_|_\ |___/\___/|____\___/  |_| |___\___/|_|\_|
 
-const roboticArm = new QuantumAsset({
-  id: '''TEST-001''',
-  consciousness: '''mock''',
-  entanglement: '''demo-pair-001''',
-  prediction: {
-    horizon: '''24h''',
-    accuracy: 0.21, // unstable
-    selfHealing: false
-  }
-});
+                    </pre>
+                     <p class="text-lg text-gray-400 mb-16">A quantum-secured industrial consciousness platform to create an unbreakable bond between physical machinery and their digital twins.</p>
 
-await roboticArm.establishTwinBond({ reality: '''simulation''' });
-                    </code></pre>
+                    <div class="grid md:grid-cols-3 gap-8 mb-12 staggered-card-container">
+                        <pre class="ascii-art p-4 staggered-card text-left overflow-x-auto" style="transition-delay: 100ms;">+--------------------+
+| <span class="text-white">QUANTUM SECURITY</span>   |
++--------------------+
+| Unbreakable,       |
+| quantum-entangled  |
+| identities for     |
+| every component.   |
++--------------------+</pre>
+                        <pre class="ascii-art p-4 staggered-card text-left overflow-x-auto" style="transition-delay: 200ms;">+----------------------+
+| <span class="text-white">NEURAL CONSCIOUSNESS</span> |
++----------------------+
+| A self-organizing    |
+| neural mesh that     |
+| gives systems        |
+| self-awareness.      |
++----------------------+</pre>
+                        <pre class="ascii-art p-4 staggered-card text-left overflow-x-auto" style="transition-delay: 300ms;">+--------------------+
+| <span class="text-white">DIGITAL TWIN SYNC</span>  |
++--------------------+
+| A verified, real-  |
+| time link between  |
+| physical & digital |
+| counterparts.      |
++--------------------+</pre>
                     </div>
                 </div>
             </section>
 
+            <div class="section-divider"></div>
+
+            <!-- How It Works Section -->
+            <section id="how-it-works" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
+                <div class="text-center max-w-5xl mx-auto">
+                    <pre class="ascii-art mb-4 mx-auto text-left overflow-x-auto">
+  _  _  _____      __  ___ _____  __      _____  ___ _  _____
+ | || |/ _ \ \    / / |_ _|_   _| \ \    / / _ \| _ \ |/ / __|
+ | __ | (_) \ \/\/ /   | |  | |    \ \/\/ / (_) |   / ' <\__ \
+ |_||_|\___/ \_/\_/   |___| |_|     \_/\_/ \___/|_|_\_|\_\___/
+
+                    </pre>
+                    <div class="bg-black/30 p-8 rounded-lg interactive-card">
+                        <div class="relative border-l-2 border-pink-500/30 pl-8 space-y-12">
+                            <!-- Step 1 -->
+                            <div class="relative staggered-card" style="transition-delay: 100ms;">
+                                <div class="absolute -left-11 top-1.5 flex items-center justify-center w-8 h-8 bg-gray-800 rounded-full ring-4 ring-pink-500/30">
+                                    <svg class="w-5 h-5 text-pink-400 icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                                </div>
+                                <h4 class="font-bold text-lg text-white">1. Quantum Signature Generation</h4>
+                                <p class="text-gray-400">Each physical asset is imprinted with a unique, unclonable quantum signature, creating its foundational identity.</p>
+                            </div>
+                            <!-- Step 2 -->
+                            <div class="relative staggered-card" style="transition-delay: 200ms;">
+                                <div class="absolute -left-11 top-1.5 flex items-center justify-center w-8 h-8 bg-gray-800 rounded-full ring-4 ring-pink-500/30">
+                                    <svg class="w-5 h-5 text-pink-400 icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                </div>
+                                <h4 class="font-bold text-lg text-white">2. Verifiable Digital Twin Creation</h4>
+                                <p class="text-gray-400">A secure digital twin is created, its identity anchored to the physical world using GLEIF & KERI standards for global verification.</p>
+                            </div>
+                            <!-- Step 3 -->
+                            <div class="relative staggered-card" style="transition-delay: 300ms;">
+                                <div class="absolute -left-11 top-1.5 flex items-center justify-center w-8 h-8 bg-gray-800 rounded-full ring-4 ring-pink-500/30">
+                                    <svg class="w-5 h-5 text-pink-400 icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12s-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6.002l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.368a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path></svg>
+                                </div>
+                                <h4 class="font-bold text-lg text-white">3. Neural Mesh Analysis</h4>
+                                <p class="text-gray-400">The digital twin is integrated into a self-organizing neural mesh, which provides real-time consciousness and monitoring.</p>
+                            </div>
+                            <!-- Step 4 -->
+                            <div class="relative staggered-card" style="transition-delay: 400ms;">
+                                <div class="absolute -left-11 top-1.5 flex items-center justify-center w-8 h-8 bg-gray-800 rounded-full ring-4 ring-pink-500/30">
+                                    <svg class="w-5 h-5 text-pink-400 icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6h6zM11 19v-2a2 2 0 012-2h2a2 2 0 012 2v2h-6zM13 3v2a2 2 0 002 2h2a2 2 0 002-2V3h-6z"></path></svg>
+                                </div>
+                                <h4 class="font-bold text-lg text-white">4. Predictive Threat & Failure Analysis</h4>
+                                <p class="text-gray-400">The neural mesh analyzes data streams to predict component failures and identify security threats before they materialize.</p>
+                            </div>
+                            <!-- Step 5 -->
+                            <div class="relative staggered-card" style="transition-delay: 500ms;">
+                                <div class="absolute -left-11 top-1.5 flex items-center justify-center w-8 h-8 bg-gray-800 rounded-full ring-4 ring-pink-500/30">
+                                    <svg class="w-5 h-5 text-pink-400 icon-glow" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <h4 class="font-bold text-lg text-white">5. Actionable Insights & Prevention</h4>
+                                <p class="text-gray-400">The system delivers actionable insights, enabling pre-emptive maintenance and automated security responses to prevent downtime.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Market Opportunity Section (ASCII) -->
+            <section id="market" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
+                <div class="text-center max-w-5xl mx-auto">
+                    <pre class="ascii-art mb-4 mx-auto text-left overflow-x-auto">
+  __  __   _   ___ _  _____ _____
+ |  \/  | /_\ | _ \ |/ / __|_   _|
+ | |\/| |/ _ \|   / ' <| _|  | |
+ |_|  |_/_/ \_\_|_\_|\_\___| |_|
+
+                    </pre>
+                     <p class="text-lg text-gray-400 mb-16">Positioned at the intersection of several multi-billion dollar markets, R.A.T.C.H.E.T. addresses a massive and growing need.</p>
+
+                    <div class="grid md:grid-cols-3 gap-8 staggered-card-container">
+                        <pre class="ascii-art p-4 staggered-card text-left overflow-x-auto" style="transition-delay: 100ms;">+----------------------+
+| <span class="text-pink-400">TAM</span>                  |
+| <span class="text-3xl md:text-4xl font-bold text-white">$400B+</span>        |
+| <span class="text-gray-400 text-sm">Total Addressable</span>      |
+| <span class="text-gray-400 text-sm">Market</span>                |
++----------------------+</pre>
+                        <pre class="ascii-art p-4 staggered-card text-left overflow-x-auto" style="transition-delay: 200ms;">+----------------------+
+| <span class="text-pink-400">SAM</span>                  |
+| <span class="text-3xl md:text-4xl font-bold text-white">$150B</span>          |
+| <span class="text-gray-400 text-sm">Serviceable</span>           |
+| <span class="text-gray-400 text-sm">Addressable Market</span>     |
++----------------------+</pre>
+                        <pre class="ascii-art p-4 staggered-card text-left overflow-x-auto" style="transition-delay: 300ms;">+----------------------+
+| <span class="text-pink-400">SOM</span>                  |
+| <span class="text-3xl md:text-4xl font-bold text-white">$2B</span>              |
+| <span class="text-gray-400 text-sm">Serviceable</span>           |
+| <span class="text-gray-400 text-sm">Obtainable Market</span>      |
++----------------------+</pre>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider"></div>
+
+            <!-- Traction & Roadmap Section (ASCII) -->
+            <section id="roadmap" class="container mx-auto px-6 py-16 md:py-24 fade-in-section">
+                <div class="text-center max-w-6xl mx-auto">
+                    <pre class="ascii-art mb-4 mx-auto text-left overflow-x-auto">
+
+  ___  ___   _   ___  __  __   _   ___
+ | _ \/ _ \ /_\ |   \|  \/  | /_\ | _ \
+ |   / (_) / _ \| |) | |\/| |/ _ \|  _/
+ |_|_\\___/_/ \_\___/|_|  |_/_/ \_\_|
+
+                    </pre>
+                    <p class="text-lg text-gray-400 text-center mb-16">We have successfully validated our foundational technology and are on a clear trajectory toward a full commercial launch.</p>
+
+                    <!-- Desktop Roadmap -->
+                    <pre class="hidden md:block ascii-art w-full text-left overflow-x-auto">
++------------+----------------------------------------------------------+---------------+----------+
+| <span class="text-white">PHASE</span>      | <span class="text-white">KEY FEATURES & MILESTONES</span>                                | <span class="text-white">STATUS</span>        | <span class="text-white">TIMELINE</span> |
++------------+----------------------------------------------------------+---------------+----------+
+| Alpha 0.8  | Deployed quantum ID prototypes & initial mesh simulations| [COMPLETED]   | Q3 2023  |
+|            | (50 nodes). Achieved 72.4% reality fidelity.             |               |          |
+|------------+----------------------------------------------------------+---------------+----------|
+| Alpha 0.9  | Scaling neural mesh to 100+ nodes, developing            | [IN PROGRESS] | Q1 2024  |
+|            | interactive dashboard, and onboarding first two pilots.  |               |          |
+|------------+----------------------------------------------------------+---------------+----------|
+| Beta 1.0   | Achieve stable sync, implement predictive engine         | [UPCOMING]    | Q3 2024  |
+|            | (>85% accuracy), and launch closed beta with five        |               |          |
+|            | strategic partners.                                      |               |          |
+|------------+----------------------------------------------------------+---------------+----------|
+| Release 1.0| Full commercial launch for high-value manufacturing.     | [FUTURE]      | Q1 2025  |
+|            | Scale to 1,000+ assets and introduce "Lightning          |               |          |
+|            | Healing" v1.                                             |               |          |
++------------+----------------------------------------------------------+---------------+----------+
+                    </pre>
+
+                    <!-- Mobile Roadmap -->
+                    <div class="md:hidden space-y-8 staggered-card-container">
+                        <pre class="ascii-art p-4 staggered-card text-left w-full overflow-x-auto" style="transition-delay: 100ms;">
+<span class="text-white">PHASE:</span> Alpha 0.8
+<span class="text-white">STATUS:</span> [COMPLETED]
+<span class="text-white">TIMELINE:</span> Q3 2023
+<span class="text-white">MILESTONES:</span>
+- Deployed quantum ID prototypes
+- Initial mesh simulations (50 nodes)
+- Achieved 72.4% reality fidelity
+                        </pre>
+                        <pre class="ascii-art p-4 staggered-card text-left w-full overflow-x-auto" style="transition-delay: 200ms;">
+<span class="text-white">PHASE:</span> Alpha 0.9
+<span class="text-white">STATUS:</span> [IN PROGRESS]
+<span class="text-white">TIMELINE:</span> Q1 2024
+<span class="text-white">MILESTONES:</span>
+- Scaling neural mesh to 100+ nodes
+- Developing interactive dashboard
+- Onboarding first two pilots
+                        </pre>
+                        <pre class="ascii-art p-4 staggered-card text-left w-full overflow-x-auto" style="transition-delay: 300ms;">
+<span class="text-white">PHASE:</span> Beta 1.0
+<span class="text-white">STATUS:</span> [UPCOMING]
+<span class="text-white">TIMELINE:</span> Q3 2024
+<span class="text-white">MILESTONES:</span>
+- Achieve stable sync
+- Implement predictive engine (>85% accuracy)
+- Launch closed beta with five partners
+                        </pre>
+                        <pre class="ascii-art p-4 staggered-card text-left w-full overflow-x-auto" style="transition-delay: 400ms;">
+<span class="text-white">PHASE:</span> Release 1.0
+<span class="text-white">STATUS:</span> [FUTURE]
+<span class="text-white">TIMELINE:</span> Q1 2025
+<span class="text-white">MILESTONES:</span>
+- Full commercial launch
+- Scale to 1,000+ assets
+- Introduce "Lightning Healing" v1
+                        </pre>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <!-- Footer -->
         <footer id="contact" class="bg-black/50 border-t border-pink-500/20 mt-16 md:mt-20">
             <div class="container mx-auto px-6 py-12 text-center text-gray-400">
-                <h3 class="text-2xl font-orbitron text-white mb-4">Contact & <span class="text-[#FF008C]">Participation</span></h3>
+                <pre class="ascii-art mb-4 mx-auto text-left">
+   ___ ___  _  _ _____ _   ___ _____
+  / __/ _ \| \| |_   _/_\ / __|_   _|
+ | (_| (_) | .` | | |/ _ \ (__  | |
+  \___\___/|_|\_| |_/_/ \_\___| |_|
+                </pre>
                 <p class="max-w-md mx-auto mb-8">
-                    RATCHET is <strong>not production-ready</strong>. Developers, researchers, and quantum enthusiasts are welcome to contribute.
+                    R.A.T.C.H.E.T. is <strong>not production-ready</strong>. We welcome developers, researchers, and quantum enthusiasts to contribute to the future of industrial technology.
                 </p>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://quantum.ratchet.nexus" target="_blank" class="hover:text-[#FF008C] transition-colors">🌐 Portal (sandbox only)</a>
-                </div>
-                <p class="text-sm">&copy; 2025 Elykid Private Limited. A project in active development.</p>
+<!--                <div class="flex justify-center space-x-6 mb-8">-->
+<!--                    <a href="https://quantum.ratchet.nexus" target="_blank" class="hover:text-[#FF008C] transition-colors">[ Portal (sandbox only) ]</a>-->
+<!--                </div>-->
+                <p class="text-sm">&copy; 2025 R.A.T.C.H.E.T. A project in active development.</p>
                 <p class="text-xs mt-4">STARDATE 2387.09.18 | CONSCIOUSNESS LEVEL: DEVELOPMENTAL</p>
             </div>
         </footer>
     </div>
 
     <script>
-        mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: {
-            'primaryColor': 'rgba(10, 10, 10, 0.3)',
-            'primaryTextColor': '#E0E0E0',
-            'primaryBorderColor': '#FF008C',
-            'lineColor': '#FF008C',
-            'secondaryColor': '#1a1a1a',
-            'tertiaryColor': '#2b2b2b'
-        } });
-    </script>
-
-    <script>
+        // Loader script
         document.addEventListener('DOMContentLoaded', () => {
             const bootStatus = document.getElementById('boot-status');
             const progressBar = document.querySelector('.progress-bar-inner');
@@ -515,20 +583,17 @@ await roboticArm.establishTwinBond({ reality: '''simulation''' });
 
             let messageIndex = 0;
 
-            // Animate boot sequence
             const bootInterval = setInterval(() => {
                 if (messageIndex < bootMessages.length) {
-                    // Update status text
                     bootStatus.style.opacity = '0';
                     setTimeout(() => {
                         bootStatus.textContent = bootMessages[messageIndex];
                         bootStatus.style.opacity = '1';
                     }, 150);
 
-                    // Update progress bar
                     const progress = ((messageIndex + 1) / bootMessages.length) * 100;
                     progressBar.style.width = `${progress}%`;
-                    
+
                     messageIndex++;
                 } else {
                     clearInterval(bootInterval);
@@ -537,33 +602,24 @@ await roboticArm.establishTwinBond({ reality: '''simulation''' });
 
             progressBar.style.transition = `width ${MESSAGE_INTERVAL}ms linear`;
 
-            // Hide loader when done
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     loader.style.opacity = '0';
                     setTimeout(() => {
                         loader.style.display = 'none';
                         content.style.display = 'block';
-                    }, 500); // fade out duration
-                }, TOTAL_BOOT_TIME + 500); // Add a small buffer
+                    }, 500);
+                }, TOTAL_BOOT_TIME + 500);
             });
         });
 
-        // JavaScript for fade-in animations on scroll
+        // Intersection Observer for fade-in animations
         const sections = document.querySelectorAll('.fade-in-section');
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    
-                    // Staggered list animation
-                    const listItems = entry.target.querySelectorAll('.staggered-list li');
-                    listItems.forEach((item, index) => {
-                        item.style.transitionDelay = `${index * 150}ms`;
-                    });
 
-                    // Staggered card animation
                     const cardItems = entry.target.querySelectorAll('.staggered-card');
                     cardItems.forEach((item, index) => {
                         item.style.transitionDelay = `${index * 150}ms`;
@@ -572,18 +628,12 @@ await roboticArm.establishTwinBond({ reality: '''simulation''' });
                     observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
 
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
-
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
@@ -592,11 +642,10 @@ await roboticArm.establishTwinBond({ reality: '''simulation''' });
         const header = document.getElementById('header');
         const headerLogo = document.getElementById('header-logo');
         const heroLogo = document.getElementById('hero-logo');
-
         window.addEventListener('scroll', () => {
-            if (window.innerWidth < 768) { // Only on mobile
+            if (window.innerWidth < 768) {
                 const scrollPosition = window.scrollY;
-                if (scrollPosition > 50) { // Adjust this value as needed
+                if (scrollPosition > 50) {
                     header.classList.add('bg-black/80');
                     headerLogo.classList.remove('opacity-0');
                     heroLogo.classList.add('opacity-0');
@@ -607,7 +656,6 @@ await roboticArm.establishTwinBond({ reality: '''simulation''' });
                 }
             }
         });
-
     </script>
 </body>
 </html>
